@@ -1,16 +1,17 @@
 package com.tobioyelami.foodapp.foodapp.restaurant.entities;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
 /**
  * Created by toyelami on 31/01/2019
  */
-@Entity(name = "meals")
-public class Meal {
+@Entity(name = "foods")
+public class Food implements Serializable {
+    private static final long serialVersionUID = 1905122041950251207L;
+
     @Id
     @GeneratedValue
     private long id;
@@ -18,16 +19,15 @@ public class Meal {
     @Column(nullable = false)
     private String name;
 
+    @Column(name="image_path")
+    private String imagePath;
+
     private String description;
 
-    @JsonManagedReference
+
+//    @JsonManagedReference
     @ManyToMany
-    @JoinTable(
-            name = "pivot_meal_to_food_item",
-            joinColumns = {@JoinColumn(name = "meal_id")},
-            inverseJoinColumns = { @JoinColumn(name = "food_item_id")}
-            )
-    private Set<FoodItem> foodItems = new HashSet<FoodItem>();
+    private Set<FoodItem> foodItems = new HashSet<>();
 
     private int packageNumber;
 
@@ -46,6 +46,14 @@ public class Meal {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
     }
 
     public String getDescription() {

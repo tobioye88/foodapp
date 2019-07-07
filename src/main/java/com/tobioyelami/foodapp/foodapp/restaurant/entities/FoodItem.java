@@ -1,11 +1,10 @@
 package com.tobioyelami.foodapp.foodapp.restaurant.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -13,14 +12,20 @@ import java.util.Set;
 /**
  * Created by toyelami on 26/01/2019
  */
+@JsonIgnoreProperties(ignoreUnknown = true)
 @Entity(name = "food_items")
-public class FoodItem {
+public class FoodItem implements Serializable {
+    private static final long serialVersionUID = 1905122041950251207L;
+
     @Id
     @GeneratedValue
     private long id;
 
     @Column(nullable = false)
     private String name;
+
+    @Column(name="image_path")
+    private String imagePath = "";
 
     private String description;
 
@@ -44,7 +49,7 @@ public class FoodItem {
 
     @ManyToMany(mappedBy = "foodItems")
     @JsonBackReference
-    private Set<Meal> meals = new HashSet<>();
+    private Set<Food> foods = new HashSet<>();
 
 
 
@@ -58,6 +63,15 @@ public class FoodItem {
 
     public String getName() {
         return name;
+    }
+
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    public void setImagePath(String imagePath) {
+        if(imagePath==null)this.imagePath="";
+        this.imagePath = imagePath;
     }
 
     public void setName(String name) {
@@ -112,12 +126,12 @@ public class FoodItem {
         isDeleted = deleted;
     }
 
-    public Set<Meal> getMeals() {
-        return meals;
+    public Set<Food> getFoods() {
+        return foods;
     }
 
-    public void setMeals(Set<Meal> meals) {
-        this.meals = meals;
+    public void setFoods(Set<Food> foods) {
+        this.foods = foods;
     }
 
     public Date getCreatedAt() {

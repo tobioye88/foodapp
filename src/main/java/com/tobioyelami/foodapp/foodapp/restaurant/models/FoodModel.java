@@ -1,22 +1,27 @@
 package com.tobioyelami.foodapp.foodapp.restaurant.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.util.HashSet;
 import java.util.Set;
 
 /**
  * Created by toyelami on 05/02/2019
  */
-public class MealModel {
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class FoodModel {
     private long id;
     private String name;
     private String description;
     private Set<FoodItemModel> foodItems = new HashSet<>();
     private int packageNumber;
     private double price;
+    private String imagePath;
+    private int quantity;
 
-    public MealModel(){}
+    public FoodModel(){}
 
-    public MealModel(long id, String name, String description, Set<FoodItemModel> foodItems, int packageNumber) {
+    public FoodModel(long id, String name, String description, Set<FoodItemModel> foodItems, int packageNumber) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -70,5 +75,21 @@ public class MealModel {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 }

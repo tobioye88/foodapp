@@ -1,5 +1,7 @@
 package com.tobioyelami.foodapp.foodapp.restaurant.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -7,6 +9,7 @@ import java.util.Set;
 /**
  * Created by toyelami on 05/02/2019
  */
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class FoodItemModel {
     private long id;
     private String name;
@@ -17,7 +20,8 @@ public class FoodItemModel {
     private boolean isVisible = true;
     private boolean isDeleted = false;
     private Date createdAt = new Date();
-    private Set<MealModel> meals = new HashSet<MealModel>();
+    private Set<FoodModel> meals = new HashSet<FoodModel>();
+    private String imagePath;
 
     public FoodItemModel() {
     }
@@ -52,6 +56,9 @@ public class FoodItemModel {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+    public void setPrice(String price) {
+        this.price = Double.valueOf(price);
     }
 
     public int getPortions() {
@@ -94,11 +101,19 @@ public class FoodItemModel {
         this.createdAt = createdAt;
     }
 
-    public Set<MealModel> getMeals() {
+    public Set<FoodModel> getMeals() {
         return meals;
     }
 
-    public void setMeals(Set<MealModel> meals) {
+    public void setMeals(Set<FoodModel> meals) {
         this.meals = meals;
+    }
+
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
+    }
+
+    public String getImagePath() {
+        return imagePath;
     }
 }

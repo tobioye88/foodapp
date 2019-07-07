@@ -28,3 +28,5 @@
 # Comment
 *.cmd
 mvnw
+
+/images

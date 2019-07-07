@@ -45,7 +45,7 @@ public abstract class BaseController<T> {
     }
 
     @PutMapping
-    public ResponseEntity<T> put(@RequestBody T request){
+    public ResponseEntity<T> edit(@RequestBody T request){
         T updated = (T) service.update(request);
         return new ResponseEntity<>(updated, HttpStatus.OK);
     }

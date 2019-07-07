@@ -1,14 +1,9 @@
 package com.tobioyelami.foodapp.foodapp;
 
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
+import java.util.stream.Collectors;
 
 //@RunWith(SpringRunner.class)
 //@SpringBootTest
@@ -40,14 +35,40 @@ public class FoodappApplicationTests {
 	}
 
 	public static List<String> getStringIds(){
-		List<String> list = new ArrayList();
-		Random random = new Random();
+		List<String> list = new ArrayList<>();
 		for (int i = 0; i < 50; i++) {
 			int number = (int) (Math.random() * ( 4000 - 1000 ));
 			list.add("" + number);
 		}
 		return list;
 	}
+
+	@Test
+	public void test(){
+        String[] numArr =  new String[] {"001", "004", "003", "006", "002"};
+		List<String> numberList = new ArrayList<>(Arrays.asList(numArr));
+//		numberStr.sort();
+		System.out.println(numberList);
+		Collections.sort(numberList);
+		System.out.println(numberList);
+	}
+
+	@Test
+	public void java8(){
+		String[] numArr =  new String[] {"001", "004", "003", "006", "002"};
+		List<String> strings = Arrays.asList(numArr);
+		List<Integer> numberList;
+		numberList = strings.stream().map(Integer::parseInt).collect(Collectors.toList());
+		Optional<Integer> first = strings.stream().map(Integer::parseInt).findFirst();
+		first.ifPresent(System.out::println);
+		System.out.println();
+//		System.out.println(integer);
+		System.out.println("number list size " + numberList.size());
+	}
+
+
+
+
 
 }
 

@@ -1,9 +1,9 @@
 package com.tobioyelami.foodapp.foodapp.restaurant.utility;
 
 import com.tobioyelami.foodapp.foodapp.restaurant.entities.FoodItem;
-import com.tobioyelami.foodapp.foodapp.restaurant.entities.Meal;
+import com.tobioyelami.foodapp.foodapp.restaurant.entities.Food;
 import com.tobioyelami.foodapp.foodapp.restaurant.models.FoodItemModel;
-import com.tobioyelami.foodapp.foodapp.restaurant.models.MealModel;
+import com.tobioyelami.foodapp.foodapp.restaurant.models.FoodModel;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -15,47 +15,50 @@ import java.util.Set;
  */
 public class Converter {
 
-    public static List<Meal> mealModelListToEntityList(List<MealModel> models)  {
-        List<Meal> meals = new ArrayList<>();
-        for (MealModel model : models) {
-            meals.add(mealModelToEntity(model));
+    private Converter(){}
+
+    public static List<Food> mealModelListToEntityList(List<FoodModel> models)  {
+        List<Food> foods = new ArrayList<>();
+        for (FoodModel model : models) {
+            foods.add(mealModelToEntity(model));
         }
-        return meals;
+        return foods;
     }
 
-    public static Meal mealModelToEntity(MealModel model)  {
+    public static Food mealModelToEntity(FoodModel model)  {
         if(model == null){
             return null;
         }
 
-        Meal meal = new Meal();
-        meal.setId(model.getId());
-        meal.setName(model.getName());
-        meal.setDescription(model.getDescription());
-        meal.setFoodItems(foodItemModelToEntity(model.getFoodItems()));
+        Food food = new Food();
+        food.setId(model.getId());
+        food.setName(model.getName());
+        food.setDescription(model.getDescription());
+        food.setFoodItems(foodItemModelToEntity(model.getFoodItems()));
 
-        return meal;
+        return food;
     }
 
-    public static List<MealModel> mealEntityListToModelList(List<Meal> entities)  {
-        List<MealModel> models = new ArrayList<>();
-        for (Meal entity : entities) {
+    public static List<FoodModel> mealEntityListToModelList(List<Food> entities)  {
+        List<FoodModel> models = new ArrayList<>();
+        for (Food entity : entities) {
             models.add(mealEntityToModel(entity));
         }
         return models;
     }
 
-    public static MealModel mealEntityToModel(Meal entity){
+    public static FoodModel mealEntityToModel(Food entity){
         if(entity == null){
             return null;
         }
 
-        MealModel model = new MealModel();
+        FoodModel model = new FoodModel();
         model.setId(entity.getId());
         model.setName(entity.getName());
         model.setDescription(entity.getDescription());
         model.setFoodItems(foodItemEntityToModel(entity.getFoodItems()));
         model.setPrice(entity.getPrice());
+        model.setImagePath(entity.getImagePath());
 
         return model;
     }
@@ -75,6 +78,7 @@ public class Converter {
         item.setId(model.getId());
         item.setPrice(model.getPrice());
         item.setPortions(model.getPortions());
+        item.setImagePath(model.getImagePath());
         return item;
     }
 

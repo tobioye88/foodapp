@@ -1,7 +1,8 @@
 package com.tobioyelami.foodapp.foodapp.restaurant.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.tobioyelami.foodapp.foodapp.restaurant.entities.FoodItem;
-import com.tobioyelami.foodapp.foodapp.restaurant.entities.Meal;
+import com.tobioyelami.foodapp.foodapp.restaurant.entities.Food;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,29 +11,30 @@ import java.util.Set;
 /**
  * Created by toyelami on 02/02/2019
  */
-public class MealResponse {
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class FoodResponse {
     private long id;
     private String name;
     private String description;
     private double price;
     private List<Item> foodItems;
 
-    private MealResponse() { }
+    private FoodResponse() { }
 
-    public static MealResponse response(Meal meal){
-        MealResponse mealResponse = new MealResponse();
-        mealResponse.setName(meal.getName());
-        mealResponse.setDescription(meal.getDescription());
-        mealResponse.setPrice(meal.getPrice());
-        mealResponse.setId(meal.getId());
-        mealResponse.setFoodItems(convertFoodItems(meal.getFoodItems()));
-        return mealResponse;
+    public static FoodResponse response(Food food){
+        FoodResponse foodResponse = new FoodResponse();
+        foodResponse.setName(food.getName());
+        foodResponse.setDescription(food.getDescription());
+        foodResponse.setPrice(food.getPrice());
+        foodResponse.setId(food.getId());
+        foodResponse.setFoodItems(convertFoodItems(food.getFoodItems()));
+        return foodResponse;
     }
 
     private static List<Item> convertFoodItems(Set<FoodItem> foodItems) {
-        List<MealResponse.Item> items = new ArrayList<>();
+        List<FoodResponse.Item> items = new ArrayList<>();
         for (FoodItem foodItem: foodItems){
-            items.add(new MealResponse.Item(foodItem.getId(), foodItem.getName(), foodItem.getDescription(), foodItem.getPrice()));
+            items.add(new FoodResponse.Item(foodItem.getId(), foodItem.getName(), foodItem.getDescription(), foodItem.getPrice()));
         }
         return items;
     }
