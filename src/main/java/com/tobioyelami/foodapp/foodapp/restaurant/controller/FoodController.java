@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.FileNotFoundException;
+import java.util.List;
 
 /**
  * Created by toyelami on 31/01/2019
@@ -30,14 +31,29 @@ public class FoodController extends BaseController<Food> {
     }
 
     @PostMapping(value = "/add", consumes = {"multipart/form-data"})
-    public ResponseEntity<FoodModel> add(@RequestPart("request") FoodRequest request,
+    public ResponseEntity<Food> add(@RequestPart("request") FoodRequest request,
                                          @RequestPart("files") MultipartFile files) throws FileNotFoundException {
         return foodService.add(request, files);
     }
 
     @PutMapping(value = "/edit")
-    public ResponseEntity<FoodModel> edit(@RequestBody FoodRequest request){
+    public ResponseEntity<Food> edit(@RequestBody FoodRequest request){
         return foodService.edit(request);
+    }
+
+    @GetMapping(value = "/search")
+    public ResponseEntity<List<Food>> search(@RequestParam("keyword") String keyword){
+        return foodService.search(keyword);
+    }
+
+    @GetMapping(value = "/byCategory")
+    public ResponseEntity<List<Food>> searchByCategory(@RequestParam("category") String category){
+        return foodService.findByCategory(category);
+    }
+
+    @GetMapping("/count")
+    public ResponseEntity<Long> count (){
+        return foodService.count();
     }
 
 }

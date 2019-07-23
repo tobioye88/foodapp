@@ -24,8 +24,9 @@ public class Food implements Serializable {
 
     private String description;
 
+    @ManyToMany
+    private Set<FoodCategory> categories = new HashSet<>();
 
-//    @JsonManagedReference
     @ManyToMany
     private Set<FoodItem> foodItems = new HashSet<>();
 
@@ -86,5 +87,13 @@ public class Food implements Serializable {
 
     public void setPackageNumber(int packageNumber) {
         this.packageNumber = packageNumber;
+    }
+
+    public Set<FoodCategory> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(Set<FoodCategory> categories) {
+        this.categories = categories;
     }
 }

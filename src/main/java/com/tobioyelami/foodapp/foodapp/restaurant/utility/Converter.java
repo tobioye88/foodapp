@@ -17,51 +17,6 @@ public class Converter {
 
     private Converter(){}
 
-    public static List<Food> mealModelListToEntityList(List<FoodModel> models)  {
-        List<Food> foods = new ArrayList<>();
-        for (FoodModel model : models) {
-            foods.add(mealModelToEntity(model));
-        }
-        return foods;
-    }
-
-    public static Food mealModelToEntity(FoodModel model)  {
-        if(model == null){
-            return null;
-        }
-
-        Food food = new Food();
-        food.setId(model.getId());
-        food.setName(model.getName());
-        food.setDescription(model.getDescription());
-        food.setFoodItems(foodItemModelToEntity(model.getFoodItems()));
-
-        return food;
-    }
-
-    public static List<FoodModel> mealEntityListToModelList(List<Food> entities)  {
-        List<FoodModel> models = new ArrayList<>();
-        for (Food entity : entities) {
-            models.add(mealEntityToModel(entity));
-        }
-        return models;
-    }
-
-    public static FoodModel mealEntityToModel(Food entity){
-        if(entity == null){
-            return null;
-        }
-
-        FoodModel model = new FoodModel();
-        model.setId(entity.getId());
-        model.setName(entity.getName());
-        model.setDescription(entity.getDescription());
-        model.setFoodItems(foodItemEntityToModel(entity.getFoodItems()));
-        model.setPrice(entity.getPrice());
-        model.setImagePath(entity.getImagePath());
-
-        return model;
-    }
 
     public static FoodItem foodItemModelToEntity(FoodItemModel model){
         if(model == null){

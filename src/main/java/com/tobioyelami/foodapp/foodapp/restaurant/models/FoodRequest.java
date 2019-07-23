@@ -1,6 +1,8 @@
 package com.tobioyelami.foodapp.foodapp.restaurant.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.tobioyelami.foodapp.foodapp.restaurant.entities.Food;
+import com.tobioyelami.foodapp.foodapp.restaurant.entities.FoodItem;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
@@ -10,36 +12,37 @@ import java.util.List;
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class FoodRequest {
-    private FoodModel meal;
-    private List<FoodModel> meals;
-    private List<FoodItemModel> foodItems;
+    private Food food;
+    private List<Food> foods;
+    private List<FoodItem> foodItems;
     private List<Long> foodItemsIds;
     private MultipartFile[] files;
+    private List<Long> categoryIds;
 
     public FoodRequest() {
     }
 
-    public FoodModel getMeal() {
-        return meal;
+    public Food getFood() {
+        return food;
     }
 
-    public void setMeal(FoodModel meal) {
-        this.meal = meal;
+    public void setFood(Food food) {
+        this.food = food;
     }
 
-    public List<FoodModel> getMeals() {
-        return meals;
+    public List<Food> getFoods() {
+        return foods;
     }
 
-    public void setMeals(List<FoodModel> meals) {
-        this.meals = meals;
+    public void setFoods(List<Food> meals) {
+        this.foods = meals;
     }
 
-    public List<FoodItemModel> getFoodItems() {
+    public List<FoodItem> getFoodItems() {
         return foodItems;
     }
 
-    public void setFoodItems(List<FoodItemModel> foodItems) {
+    public void setFoodItems(List<FoodItem> foodItems) {
         this.foodItems = foodItems;
     }
 
@@ -57,5 +60,13 @@ public class FoodRequest {
 
     public void setFiles(MultipartFile[] files) {
         this.files = files;
+    }
+
+    public List<Long> getCategoryIds() {
+        return categoryIds;
+    }
+
+    public void setCategoryIds(List<Long> categoryIds) {
+        this.categoryIds = categoryIds;
     }
 }
